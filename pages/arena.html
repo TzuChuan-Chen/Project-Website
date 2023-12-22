@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Live Cmaera</title>
+        <style>
+            .btn-camera {
+                border: none;
+                background: none;
+            }
+        </style>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+        <link href="/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    </head>
+    <body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container px-2 px-lg-1">
+          <a class="navbar-brand">NCKU Robotics Lab</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <!-- <li class="nav-item active">
+                <a class="nav-link" href="/">Home</a>
+              </li> -->
+              <li class="nav-item">
+                <a class="nav-link" href="/pages/arena.html">Live Camera</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  id="fullViewDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Full View Stitching
+                </a>
+                <div class="dropdown-menu" aria-labelledby="fullViewDropdown">
+                  <a
+                    href="/pages/stitching.html"
+                    id="stitch-src1"
+                    class="dropdown-item stitch-video-link"
+                    data-src="/data/stitching/Stitch_1.mp4"
+                    >Video 1</a
+                  >
+                  <a
+                    href="/pages/stitching.html"
+                    id="stitch-src2"
+                    class="dropdown-item stitch-video-link"
+                    data-src="/data/stitching/Stitch_2.mp4"
+                    >Video 2</a
+                  >
+                  <a
+                    href="/pages/stitching.html"
+                    id="stitch-src3"
+                    class="dropdown-item stitch-video-link"
+                    data-src="/data/stitching/Stitch_3.mp4"
+                    >Video 3</a
+                  >
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  id="fullViewDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Rotation Replay
+                </a>
+                <div class="dropdown-menu" aria-labelledby="fullViewDropdown">
+                  <a
+                    href="/pages/rotation.html"
+                    id="rotation-src1"
+                    class="dropdown-item rotation-video-link"
+                    data-src="/data/rotation/Rotation_1.mp4"
+                    >Video 1</a
+                  >
+                  <a
+                    href="/pages/rotation.html"
+                    id="rotation-src2"
+                    class="dropdown-item rotation-video-link"
+                    data-src="/data/rotation/Rotation_2.mp4"
+                    >Video 2</a
+                  >
+                  <a
+                    href="/pages/rotation.html"
+                    id="rotation-src3"
+                    class="dropdown-item rotation-video-link"
+                    data-src="/data/rotation/Rotation_3.mp4"
+                    >Video 3</a
+                  >
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+        <!-- Page Content-->
+        <h1 class="mt-1 text-center">---------------------</h1> 
+        <hr/>
+        <!-- let container in center -->
+        <div class="container">
+          <div class="row">
+            <img id="img">
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col">
+              <button id="camera1" class="btn-camera" data-cam="0" style="transform: rotate(330deg);"><i class="fa-solid fa-video fa-lg"></a></i></button>
+            </div>
+            <div class="col">
+              <button id="camera4" class="btn-camera" data-cam="3" style="transform: rotate(300deg);"><i class="fa-solid fa-video fa-lg"></i></button>
+            </div>
+            <div class="col">
+              <button id="camera7" class="btn-camera" data-cam="5" style="transform: rotate(270deg);"><i class="fa-solid fa-video fa-lg"></i></button>
+            </div>
+            <div class="col">
+              <button id="camera10" class="btn-camera" data-cam="7" style="transform: rotate(240deg);"><i class="fa-solid fa-video fa-lg"></i></button>
+            </div>
+            <div class="col">
+              <button id="camera13" class="btn-camera" data-cam="9" style="transform: rotate(210deg);"><i class="fa-solid fa-video fa-lg"></i></button>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="btn-group gap-2" role="group" style="bottom: 180px;left: 10px;visibility: hidden;">
+            <button id="camera14" class="btn-camera" style="transform: rotate(305deg);"><i class="fa-solid fa-video fa-2xl"></i></button>
+            <button id="camera15" class="btn-camera" data-cam="16" style="transform: rotate(300deg);"><i class="fa-solid fa-video fa-2xl"></i></button>
+            <button id="camera16" class="btn-camera" data-cam="17" style="transform: rotate(295deg);"><i class="fa-solid fa-video fa-2xl"></i></button>
+            <button id="camera17" class="btn-camera" data-cam="18" style="transform: rotate(270deg);"><i class="fa-solid fa-video fa-2xl"></i></button>
+            <button id="camera18" class="btn-camera" data-cam="19" style="transform: rotate(245deg);"><i class="fa-solid fa-video fa-2xl"></i></button>
+            <button id="camera19" class="btn-camera" data-cam="20" style="transform: rotate(240deg);"><i class="fa-solid fa-video fa-2xl"></i></button>
+            <button id="camera20" class="btn-camera" style="transform: rotate(235deg);"><i class="fa-solid fa-video fa-2xl"></i></button>
+        </div> -->
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/livecamera_viewer.js"></script>
+        <script>
+            let img = document.getElementById('img'),
+                socket = io('/cam1');
+                document.querySelectorAll('.btn-camera').forEach(function(button) {
+                  button.addEventListener('click', function() {
+                    if (socket) {
+                        socket.disconnect();
+                    }
+                    const cam = this.getAttribute('data-cam');
+                    console.log(`/cam${cam}`);
+                    socket = io(`/cam${cam}`); // 更新 value
+                    socket.on('data', function(data) {
+                      let bytes = new Uint8Array(data);
+                      img.src = 'data:image/jpeg;base64,' + base64ArrayBuffer(bytes);
+                    });
+                  });
+                });
+
+        </script>
+        <!-- Bootstrap core JS-->
+        <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <!-- Core theme JS-->
+        
+        
+    </body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Full View Stitching</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <link
+      href="../node_modules/bootstrap/dist/css/bootstrap.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container px-4 px-lg-1">
+        <a class="navbar-brand">NCKU Robotics Lab</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <!-- <li class="nav-item active">
+              <a class="nav-link" href="/">Home</a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="/pages/arena.html">Live Camera</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                href="/pages/stitching.html"
+                class="nav-link dropdown-toggle"
+                id="fullViewDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Full View Stitching
+              </a>
+              <div class="dropdown-menu" aria-labelledby="fullViewDropdown">
+                <a
+                  href="/pages/stitching.html"
+                  id="stitch-src1"
+                  class="dropdown-item stitch-video-link"
+                  data-src="/data/stitching/Stitch_1.mp4"
+                  >Video 1</a
+                >
+                <a
+                  href="/pages/stitching.html"
+                  id="stitch-src2"
+                  class="dropdown-item stitch-video-link"
+                  data-src="/data/stitching/Stitch_2.mp4"
+                  >Video 2</a
+                >
+                <a
+                  href="/pages/stitching.html"
+                  id="stitch-src3"
+                  class="dropdown-item stitch-video-link"
+                  data-src="/data/stitching/Stitch_3.mp4"
+                  >Video 3</a
+                >
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                href="/pages/rotation.html"
+                class="nav-link dropdown-toggle"
+                id="fullViewDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Rotation Replay
+              </a>
+              <div class="dropdown-menu" aria-labelledby="fullViewDropdown">
+                <a
+                  id="rotation-src1"
+                  class="dropdown-item rotation-video-link"
+                  data-src="/data/rotation/Rotation_1.mp4"
+                  >Video 1</a
+                >
+                <a
+                  id="rotation-src2"
+                  class="dropdown-item rotation-video-link"
+                  data-src="/data/rotation/Rotation_2.mp4"
+                  >Video 2</a
+                >
+                <a
+                  id="rotation-src3"
+                  class="dropdown-item rotation-video-link"
+                  data-src="/data/rotation/Rotation_3.mp4"
+                  >Video 3</a
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <h1 class="mt-1 text-center">---------------------</h1> 
+    <hr/>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <!-- <div id="app"></div> -->
+          <video id="video" controls style=" width: 100%; height: auto;"></video>
+        </div>
+
+      </div>
+    </div>
+    <script>
+      const videoElement = document.getElementById('video');
+      const videoLinks = document.querySelectorAll('.rotation-video-link');
+
+      let newVideoUrl = document.getElementById('rotation-src1').getAttribute('data-src');
+      changeVideoSource(newVideoUrl);
+
+      videoLinks.forEach(videoLink => {
+          videoLink.addEventListener('click', () => {
+              let newVideoUrl = videoLink.getAttribute('data-src');
+              changeVideoSource(newVideoUrl);
+          });
+      });
+
+      function changeVideoSource(newVideoUrl) {
+          if (newVideoUrl) {
+              videoElement.src = newVideoUrl;//https://s.bepro11.com/vr-video-sample.mp4
+              videoElement.loop = true;
+              videoElement.muted = true;
+              videoElement.playsInline = true;
+              videoElement.crossOrigin = "anonymous"; 
+              //videoElement.autoplay = true;
+              videoElement.play();
+          } else {
+              console.log('Please enter a valid video URL.');
+          }
+      }
+    </script>
+    <!-- <div class="container">
+      <div style="position: relative; bottom:200px;">
+        <button id="move_left" style="border:none;background:none;padding-right: 200px;"><i class="fas fa-angle-left fa-2xl"></i></button>
+        <button id="move_right" style="border:none;background:none;padding-left: 200px;"><i class="fas fa-angle-right fa-2xl"></i></button>
+      </div>
+      <div
+        class="player text-center"
+        style="position: relative; bottom: 80px; right: 0px"
+      >
+
+        <button
+          type="button"
+          id="button_bw"
+          class="btn btn-light"
+        >
+          <i class="fa fa-backward"></i>
+        </button>
+
+        <button
+          type="button"
+          id="button_play"
+          class="btn btn-light"
+        >
+          <i class="fa fa-play"></i>
+        </button>
+
+        <button
+          type="button"
+          id="button_stop"
+          class="btn btn-light"
+        >
+          <i class="fa fa-stop"></i>
+        </button>
+
+        <button
+          type="button"
+          id="button_fw"
+          class="btn btn-light"
+        >
+          <i class="fa fa-forward"></i>
+        </button>
+      </div>
+    </div> -->
+    <!-- Bootstrap core JS-->
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <!-- Core theme JS-->
+    <!-- <script type="module" src="/js/camera_viewer.js"></script> -->
+    <!-- <script type="module" src="../js/stitching_viewer.js"></script> -->
+    <!-- <script type="module" src="../js/rotation_viewer.js"></script> -->
+  </body>
+</html>
